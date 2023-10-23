@@ -6,11 +6,35 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:54 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/23 10:30:17 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:21:27 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != 0)
+	{
+		i++;
+	}
+	return (i);
+}
+
+size_t	linlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\n')
+	{
+		i++;
+	}
+	return (i);
+}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -34,7 +58,7 @@ char	*ft_strchr(const char *s, int c)
 	return (result);
 }
 
-char	*ft_strdup(char *src)
+/* char	*ft_strdup(char *src)
 {
 	char	*dupli;
 	int		i;
@@ -55,7 +79,7 @@ char	*ft_strdup(char *src)
 	}
 	dupli[i] = '\0';
 	return (dupli);
-}
+} */
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -80,30 +104,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	subs[i] = '\0';
 	return (subs);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != 0)
-	{
-		i++;
-	}
-	return (i);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*str;
-
-	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (str == NULL)
-		return (NULL);
-	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
-	ft_strlcat(str, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
-	return (str);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
