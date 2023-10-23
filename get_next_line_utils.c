@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:54 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/20 17:13:48 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/23 10:30:17 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,54 @@ char	*ft_strchr(const char *s, int c)
 	return (result);
 }
 
+char	*ft_strdup(char *src)
+{
+	char	*dupli;
+	int		i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		i++;
+	}
+	dupli = (char *) malloc (i + 1);
+	if (!dupli)
+		return (NULL);
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dupli[i] = src[i];
+		i++;
+	}
+	dupli[i] = '\0';
+	return (dupli);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*subs;
+	size_t	i;
+
+	i = 0;
+	if (start >= ft_strlen(s) || len == 0)
+	{
+		subs = malloc(1 * sizeof(char));
+		return (subs);
+	}
+	if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	subs = malloc(len + 1 * sizeof(char));
+	if (subs == NULL)
+		return (NULL);
+	while (i < len && s[start] != '\0')
+	{
+		subs[i] = s[i + start];
+		i++;
+	}
+	subs[i] = '\0';
+	return (subs);
+}
+
 size_t	ft_strlen(const char *s)
 {
 	int	i;
@@ -46,41 +94,39 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*subs;
-	size_t	i;
+	char	*str;
 
-	i = 0;
-	if (start >= ft_strlen(s) || len == 0)
-	{
-		subs = ft_calloc(1, 1);
-		return (subs);
-	}
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
-	subs = ft_calloc(len + 1, sizeof(char));
-	if (subs == NULL)
+	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (str == NULL)
 		return (NULL);
-	while (i < len && s[start] != '\0')
-	{
-		subs[i] = s[i + start];
-		i++;
-	}
-	subs[i] = '\0';
-	return (subs);
+	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
+	ft_strlcat(str, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+	return (str);
 }
 
-char	*read(fd)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		bytes_read;
-	char	*tinybuffer;
-
-	tinybuffer = malloc(BUFFER_SIZE + 1 * sizeof(char)); //*********
-	if (tinybuffer == NULL)
+	char		*str;
+	size_t		i;
+	size_t		e;
+	
+	i = 0;
+	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (str == NULL)
 		return (NULL);
-	bytes_read = read(fd, tinybuffer, BUFFER_SIZE);
-	if (bytes_read <= 0)
-		return (NULL);
-	return (tinybuffer);
+	while (s1[i] != '\0' && ft_strlen(s1 + 1) > i + 1)
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	e = 0;
+	while (s2[e] != '\0' && ft_strlen(s2 + 1) > e + 1)
+	{
+		str[i] = s2[e];
+		i++;
+		e++;
+	}
+	return (str);
 }
