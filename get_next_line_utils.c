@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:54 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/23 18:21:27 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:49:31 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ size_t	linlen(const char *s)
 	{
 		i++;
 	}
-	return (i);
+	return (i + 1);
 }
 
 char	*ft_strchr(const char *s, int c)
