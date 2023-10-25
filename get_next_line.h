@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:16:09 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/24 17:32:03 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:48:19 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 size_t	linlen(char *s);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 
 
