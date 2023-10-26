@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:31 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/25 18:52:11 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:08:38 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	*ft_calloc(size_t num, size_t size)
 	return (blob);
 } */
 
-static char	*readme(char **rawstr, int fd, char *eof)
+static char	*readme(char **rawstr, int fd) //char *eof
 {
 	int		bytes_read;
 	char	*tinybuffer;
@@ -78,18 +78,19 @@ static char	*readme(char **rawstr, int fd, char *eof)
 	if (tinybuffer == NULL)
 		return (NULL);
 	bytes_read = 1;
-	while (!ft_strchr(tinybuffer, '\n') && bytes_read != 0)
+	while (!ft_strchr(tinybuffer, '\n') && bytes_read > 0)
 	{
 		bytes_read = read(fd, tinybuffer, BUFFER_SIZE);
+		tinybuffer[bytes_read] = '\0';
 		if (bytes_read == -1)
 			return (free(tinybuffer), free(*rawstr), NULL);
-		if (bytes_read == 0)
+	/* 	if (bytes_read == 0)
 		{
 			*eof = 1;
 			break ;
-		}
-		/*if (bytes_read < 0)
-			return (NULL);*/
+		} */
+		if (bytes_read < 0)
+			return (NULL);
 		// printf("Buffer: %s\n", tinybuffer);
 		if (bytes_read > 0)
 			*rawstr = ft_strjoin(*rawstr, tinybuffer);
@@ -111,15 +112,15 @@ char	*get_next_line(int fd)
 	char		*tmp;
 	static char	*rawstr = NULL;
 	size_t		len;
-	char		eof;
+/* 	char		eof;
 
-	eof = 0;
+	eof = 0; */
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	// rawstr = ft_calloc(BUFFER_SIZE, sizeof(char));
 	// if (rawstr == NULL)
 	// 	return (NULL);
-	rawstr = readme(&rawstr, fd, &eof);
+	rawstr = readme(&rawstr, fd); //&eof
 	if (rawstr == NULL)
 		return (NULL);
 	len = linlen(rawstr);
@@ -145,11 +146,11 @@ char	*get_next_line(int fd)
 	} else {
 		free(rawstr);
 	}
-	if (eof == 1)
+	/* if (eof == 1)
 	{
 		free(tmp);
 		cookeds = NULL;
-	}
+	} */
 	return (cookeds);
 }
 
