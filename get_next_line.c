@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:31 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/27 18:20:46 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/27 19:15:55 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	*ft_memset(void *s, int c, size_t size)
 	return (s);
 }
 
+/*
 void	*ft_calloc(size_t num, size_t size)
 {
 	void	*buffer;
@@ -49,6 +50,12 @@ void	*ft_calloc(size_t num, size_t size)
 		return (NULL);
 	ft_memset(buffer, '\0', bytesize);
 	return (buffer);
+}
+*/
+
+void	*ft_calloc(size_t num, size_t size)
+{
+	return (malloc(num * size));
 }
 
 /* void	*ft_calloc(size_t nmemb, size_t size)
@@ -73,8 +80,10 @@ static char	*readme(char **rawstr, int fd) //char *eof
 {
 	int		bytes_read;
 	char	*tinybuffer;
+	int		progress;
 	//int		loop;
 
+	progress = 0;
 	tinybuffer = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (tinybuffer == NULL)
 	{
@@ -91,9 +100,10 @@ static char	*readme(char **rawstr, int fd) //char *eof
 		if (bytes_read == 0)
 			break ;
 		// printf("Buffer: %s\n", tinybuffer);
-		*rawstr = ft_strjoin(*rawstr, tinybuffer);
+		*rawstr = ft_strjoin(*rawstr, tinybuffer, bytes_read, &progress);
 		if (*rawstr == NULL)
 			return (NULL);
+		printf("%s\n", *rawstr);
 	}
 	//printf("%s", tinybuffer);
 	free(tinybuffer);

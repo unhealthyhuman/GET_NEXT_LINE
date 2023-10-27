@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:16:09 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/27 15:54:12 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:38:24 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1000000
+# define BUFFER_SIZE 1
 # endif
 
 #include <unistd.h>

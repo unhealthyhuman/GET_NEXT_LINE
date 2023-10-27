@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:54 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/27 13:39:18 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/27 19:17:22 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 #include <stdio.h>
 
+/*
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char		*str;
@@ -155,6 +156,30 @@ char	*ft_strjoin(char *s1, char *s2)
 		str[i] = s2[e];
 		i++;
 		e++;
+	}
+	str[i] = '\0';
+	return (free(s1), str);
+}
+*/
+
+char	*ft_strjoin(char *s1, char *s2, int bytes_read, int *progress)
+{
+	char		*str;
+	size_t		i;
+	size_t		e;
+	
+	i = 0;
+	if (s1 == NULL)
+		return (*s2);
+	// printf("S1: %s\n", s2);
+	str = ft_calloc( + bytes_read + 1, sizeof(char));
+	if (str == NULL)
+		return (free(s1), free(s2), NULL);
+	while (s2[i] != '\0' && ft_strlen(s1) > i)
+	{
+		str[*progress] = s1[i];
+		i++;
+		*progress += 1;
 	}
 	str[i] = '\0';
 	return (free(s1), str);
