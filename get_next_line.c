@@ -6,34 +6,18 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:31 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/27 14:11:16 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:20:46 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-// static void	liberator(char *imprisoned_ptr)
-// {
-// 	free(imprisoned_ptr);
-// 	imprisoned_ptr = NULL;
-// }
-
-/* char	*ft_strtrim(char const *s1, char const *set)
+static void	liberator(char *imprisoned_ptr)
 {
-	char	*strim;
-	size_t	i;
-	size_t	len;
-
-	i = 0;
-	while (s1[i] && check_set(s1[i], set))
-		i++;
-	len = ft_strlen(s1);
-	while (len > i && check_set(s1[len - 1], set))
-		len--;
-	strim = ft_substr(s1, i, len - i);
-	return (strim);
-} */
+	free(imprisoned_ptr);
+	imprisoned_ptr = NULL;
+}
 
 void	*ft_memset(void *s, int c, size_t size)
 {
@@ -93,41 +77,23 @@ static char	*readme(char **rawstr, int fd) //char *eof
 
 	tinybuffer = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (tinybuffer == NULL)
+	{
+		free(*rawstr);
 		return (NULL);
+	}
 	bytes_read = 1;
-	while (!ft_strchr(tinybuffer, '\n') && bytes_read > 0)
+	while (!ft_strchr(tinybuffer, '\n') && (bytes_read > 0))
 	{
 		bytes_read = read(fd, tinybuffer, BUFFER_SIZE);
 		tinybuffer[bytes_read] = '\0';
 		if (bytes_read == -1)
-			return (free(tinybuffer), free(*rawstr), NULL);
-/* 		if (bytes_read == 0)
-		{
-			eof = 1;
+			return (free(tinybuffer), liberator(*rawstr), NULL);
+		if (bytes_read == 0)
 			break ;
-		} */
-		if (bytes_read < 0)
-			return (NULL);
 		// printf("Buffer: %s\n", tinybuffer);
-		if (bytes_read > 0)
-			*rawstr = ft_strjoin(*rawstr, tinybuffer);
+		*rawstr = ft_strjoin(*rawstr, tinybuffer);
 		if (*rawstr == NULL)
-		{
-			free(tinybuffer);
 			return (NULL);
-		}
-		//printf("Line: %s\n", rawstr);
-	/* 	if (bytes_read == 0)
-		{
-			loop = 1;
-			if (loop == 1)
-				break ;
-			else
-			{
-				loop++;
-				return (NULL);
-			}
-		} */
 	}
 	//printf("%s", tinybuffer);
 	free(tinybuffer);
@@ -156,7 +122,7 @@ char	*get_next_line(int fd)
 	//printf("%s | ", cookeds);
 	if (cookeds == NULL)
 	{
-		//free(rawstr);
+		free(rawstr);
 		return (NULL);
 	}
 	//printf("%s | ", cookeds);
@@ -167,23 +133,25 @@ char	*get_next_line(int fd)
 		tmp = ft_substr(rawstr, len, ((ft_strlen(rawstr) + 1) - len));
 		if (tmp == NULL)
 		{
-			free(rawstr);
+			liberator(rawstr);
 			free(cookeds);
 			return (NULL);
 		}
-		free(rawstr);
+		liberator(rawstr);
 		rawstr = tmp;
-	} else {
-		free(rawstr);
 	}
+	else
+		liberator(rawstr);
 /* 	if (eof == 1)
 	{
 		free(tmp);
 		cookeds = NULL;
 	} */
+	//free(tmp);
 	return (cookeds);
 }
 
+//static variables remember their value, therefore u need to set them to NULL after freeing them
 
 // #include "get_next_line.h"
 // #include <fcntl.h>
