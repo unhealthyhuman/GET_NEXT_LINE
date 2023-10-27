@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:54 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/25 18:20:47 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:39:18 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ size_t	ft_strlen(const char *s)
 	}
 	return (i);
 }
+/* int	linlen(char *s, char c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
+} */
+
 
 size_t	linlen(char *s)
 {
@@ -33,11 +47,15 @@ size_t	linlen(char *s)
 	i = 0;
 	if (!s)
 		return (0);
+	if (s[0] == '\n')
+		return (1);
 	while (s[i] != '\n' && s[i])
 	{
 		i++;
+		if (s[i] == '\n')
+			return (i + 1);
 	}
-	return (i + 1);
+	return (i);
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -63,6 +81,19 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (result);
 }
+/* static int	check_set(char c, char const *set)
+{
+	int	i;
+
+	i = 0;
+	while (set[i])
+	{
+		if (c == set[i])
+			return (1);
+		i++;
+	}
+	return (0);
+} */
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -70,6 +101,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 
 	i = 0;
+	if (!s || !s[0])
+		return (NULL);
 	if (start >= ft_strlen(s) || len == 0)
 	{
 		subs = ft_calloc(1, sizeof(char));

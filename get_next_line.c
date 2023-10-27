@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:31 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/26 13:08:38 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:11:16 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,22 @@
 // 	free(imprisoned_ptr);
 // 	imprisoned_ptr = NULL;
 // }
+
+/* char	*ft_strtrim(char const *s1, char const *set)
+{
+	char	*strim;
+	size_t	i;
+	size_t	len;
+
+	i = 0;
+	while (s1[i] && check_set(s1[i], set))
+		i++;
+	len = ft_strlen(s1);
+	while (len > i && check_set(s1[len - 1], set))
+		len--;
+	strim = ft_substr(s1, i, len - i);
+	return (strim);
+} */
 
 void	*ft_memset(void *s, int c, size_t size)
 {
@@ -73,6 +89,7 @@ static char	*readme(char **rawstr, int fd) //char *eof
 {
 	int		bytes_read;
 	char	*tinybuffer;
+	//int		loop;
 
 	tinybuffer = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (tinybuffer == NULL)
@@ -84,9 +101,9 @@ static char	*readme(char **rawstr, int fd) //char *eof
 		tinybuffer[bytes_read] = '\0';
 		if (bytes_read == -1)
 			return (free(tinybuffer), free(*rawstr), NULL);
-	/* 	if (bytes_read == 0)
+/* 		if (bytes_read == 0)
 		{
-			*eof = 1;
+			eof = 1;
 			break ;
 		} */
 		if (bytes_read < 0)
@@ -100,6 +117,17 @@ static char	*readme(char **rawstr, int fd) //char *eof
 			return (NULL);
 		}
 		//printf("Line: %s\n", rawstr);
+	/* 	if (bytes_read == 0)
+		{
+			loop = 1;
+			if (loop == 1)
+				break ;
+			else
+			{
+				loop++;
+				return (NULL);
+			}
+		} */
 	}
 	//printf("%s", tinybuffer);
 	free(tinybuffer);
@@ -112,7 +140,7 @@ char	*get_next_line(int fd)
 	char		*tmp;
 	static char	*rawstr = NULL;
 	size_t		len;
-/* 	char		eof;
+	/* char		eof;
 
 	eof = 0; */
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -125,13 +153,15 @@ char	*get_next_line(int fd)
 		return (NULL);
 	len = linlen(rawstr);
 	cookeds = ft_substr(rawstr, 0, len);
+	//printf("%s | ", cookeds);
 	if (cookeds == NULL)
 	{
-		free(rawstr);
+		//free(rawstr);
 		return (NULL);
 	}
 	//printf("%s | ", cookeds);
-	if ((ft_strlen(rawstr) - linlen(rawstr)) > 0)
+	//printf("\n%lu\n", (ft_strlen(rawstr) - linlen(rawstr)));
+	if (((ft_strlen(rawstr) + 1) - len) > 0)
 	{
 		//printf("HELOOOOOOOO %lu %lu\n", ft_strlen(rawstr), linlen(rawstr));
 		tmp = ft_substr(rawstr, len, ((ft_strlen(rawstr) + 1) - len));
@@ -146,7 +176,7 @@ char	*get_next_line(int fd)
 	} else {
 		free(rawstr);
 	}
-	/* if (eof == 1)
+/* 	if (eof == 1)
 	{
 		free(tmp);
 		cookeds = NULL;
