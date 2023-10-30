@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:54 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/30 13:59:30 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:44:23 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	// printf("S1: %s\n", s2);
 	str = ft_calloc(papamericano + 1, sizeof(char));
 	if (str == NULL)
-		return (liberator(s1), liberator(s2), NULL);
+		return (liberator(&s1), liberator(&s2), NULL);
 	while (s1 != NULL && s1[i] != '\0')
 	{
 		str[i] = s1[i];
@@ -122,7 +122,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	str[i] = '\0';
-	return (liberator(s1), str);
+	return (liberator(&s1), str);
 }
 
 /* char	*ft_strjoin(char *s1, char *s2)

@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:31 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/30 14:38:03 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:41:43 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char	*get_next_line(int fd)
 		liberator(&rawstr);
 	return (cookeds);
 }
-
+//
 //static variables remember their value, therefore u need to set them to NULL after liberatoring them
 
 // ft_substr(rawstr, len, ((ft_strlen(rawstr) + 1) - len))
