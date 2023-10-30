@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:54 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/27 19:17:22 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:15:53 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,6 @@ size_t	ft_strlen(const char *s)
 	}
 	return (i);
 }
-/* int	linlen(char *s, char c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			return (i);
-		i++;
-	}
-	return (-1);
-} */
-
 
 size_t	linlen(char *s)
 {
@@ -81,19 +67,6 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (result);
 }
-/* static int	check_set(char c, char const *set)
-{
-	int	i;
-
-	i = 0;
-	while (set[i])
-	{
-		if (c == set[i])
-			return (1);
-		i++;
-	}
-	return (0);
-} */
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -123,11 +96,36 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	subs[i] = '\0';
 	return (subs);
 }
-
-#include <stdio.h>
-
-/*
 char	*ft_strjoin(char *s1, char *s2)
+{
+	size_t		papamericano;
+	char		*str;
+	size_t		i;
+	size_t		e;
+	
+	i = 0;
+	e = 0;
+	papamericano = ft_strlen(s1) + ft_strlen(s2);
+	// printf("S1: %s\n", s2);
+	str = ft_calloc(papamericano + 1, sizeof(char));
+	if (str == NULL)
+		return (free(s1), free(s2), NULL);
+	while (s1 != NULL && s1[i] != '\0')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2 != NULL && s2[e] != '\0')
+	{
+		str[i] = s2[e];
+		e++;
+		i++;
+	}
+	str[i] = '\0';
+	return (free(s1), str);
+}
+
+/* char	*ft_strjoin(char *s1, char *s2)
 {
 	char		*str;
 	size_t		i;
@@ -159,10 +157,39 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	str[i] = '\0';
 	return (free(s1), str);
-}
-*/
+} */
 
-char	*ft_strjoin(char *s1, char *s2, int bytes_read, int *progress)
+/* char	*ft_strjoin(char *s1, char *s2, int bytes_read, int *progress)
+{
+	size_t		papamericano;
+	char		*str;
+	size_t		i;
+	size_t		e;
+	
+	i = 0;
+	e = 0;
+	papamericano = ft_strlen(s1) + ft_strlen(s2);
+	if (s1 == NULL)
+		return (*s2);
+	// printf("S1: %s\n", s2);
+	str = ft_calloc(papamericano + 1, sizeof(char));
+	if (str == NULL)
+		return (free(s1), free(s2), NULL);
+	while (s1 != NULL && s1[i] != '\0')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2 != NULL && s2[e] != '\0')
+	{
+		str[i] = s2[e];
+		e++;
+		i++;
+	}
+	str[i] = '\0';
+	return (free(s1), str);
+} */
+/* char	*ft_strjoin(char *s1, char *s2, int bytes_read, int *progress)
 {
 	char		*str;
 	size_t		i;
@@ -183,8 +210,9 @@ char	*ft_strjoin(char *s1, char *s2, int bytes_read, int *progress)
 	}
 	str[i] = '\0';
 	return (free(s1), str);
-}
+} */
 
+//#include <stdio.h>
 /*int	main(void)
 {
 	char	*fuck;
