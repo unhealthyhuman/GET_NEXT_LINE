@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:31 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/30 15:58:44 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:47:05 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,12 @@ char	*get_next_line(int fd)
 	len = linlen(rawstr);
 	cookeds = ft_substr(rawstr, 0, len);
 	if (cookeds == NULL)
-	{
-		liberator(&rawstr);
-		return (NULL);
-	}
+		return (liberator(&rawstr), NULL);
 	if (((ft_strlen(rawstr) + 1) - len) > 0)
 	{
 		tmp = ft_substr(rawstr, len, ((ft_strlen(rawstr) + 1) - len));
 		if (tmp == NULL)
-			return (liberator(&rawstr),liberator(&cookeds),NULL);
+			return (liberator(&rawstr), liberator(&cookeds), NULL);
 		liberator(&rawstr);
 		rawstr = tmp;
 	}
