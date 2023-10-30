@@ -6,19 +6,19 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:31 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/30 12:37:34 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:03:33 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-static void	liberator(char *imprisoned_ptr)
+void	liberator(char **imprisoned_ptr)
 {
-	if (imprisoned_ptr)
+	if (*imprisoned_ptr)
 	{
-		free(imprisoned_ptr);
-		imprisoned_ptr = NULL;
+		liberator(*imprisoned_ptr);
+		*imprisoned_ptr = NULL;
 	}
 }
 
@@ -54,12 +54,7 @@ void	*ft_calloc(size_t num, size_t size)
 	return (buffer);
 }
 
-/* void	*ft_calloc(size_t num, size_t size)
-{
-	return (malloc(num * size));
-} */
-
-static char	*readme(char **rawstr, int fd) //char *eof
+static char	*readme(char **rawstr, int fd)
 {
 	int		bytes_read;
 	char	*tinybuffer;
@@ -67,7 +62,7 @@ static char	*readme(char **rawstr, int fd) //char *eof
 	tinybuffer = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (tinybuffer == NULL)
 	{
-		free(*rawstr);
+		liberator(rawstr);
 		return (NULL);
 	}
 	bytes_read = 1;
@@ -75,7 +70,7 @@ static char	*readme(char **rawstr, int fd) //char *eof
 	{
 		bytes_read = read(fd, tinybuffer, BUFFER_SIZE);
 		if (bytes_read == -1)
-			return (free(tinybuffer), liberator(*rawstr), NULL);
+			return (liberator(&tinybuffer), liberator(rawstr), NULL);
 		if (bytes_read == 0)
 			break ;
 		tinybuffer[bytes_read] = '\0';
@@ -83,7 +78,7 @@ static char	*readme(char **rawstr, int fd) //char *eof
 		if (*rawstr == NULL)
 			return (NULL);
 	}
-	free(tinybuffer);
+	liberator(&tinybuffer);
 	return (*rawstr);
 }
 
@@ -103,36 +98,27 @@ char	*get_next_line(int fd)
 	cookeds = ft_substr(rawstr, 0, len);
 	if (cookeds == NULL)
 	{
-		liberator(rawstr);
+		liberator(&rawstr);
 		return (NULL);
 	}
-	//printf("%s | ", cookeds);
-	//printf("\n%lu\n", (ft_strlen(rawstr) - linlen(rawstr)));
 	if (((ft_strlen(rawstr) + 1) - len) > 0)
 	{
-		//printf("HELOOOOOOOO %lu %lu\n", ft_strlen(rawstr), linlen(rawstr));
 		tmp = ft_substr(rawstr, len, ((ft_strlen(rawstr) + 1) - len));
 		if (tmp == NULL)
 		{
-			liberator(rawstr);
-			free(cookeds);
+			liberator(&rawstr);
+			liberator(&cookeds);
 			return (NULL);
 		}
-		liberator(rawstr);
+		liberator(&rawstr);
 		rawstr = tmp;
 	}
 	else
-		liberator(rawstr);
-/* 	if (eof == 1)
-	{
-		free(tmp);
-		cookeds = NULL;
-	} */
-	//free(tmp);
+		liberator(&rawstr);
 	return (cookeds);
 }
 
-//static variables remember their value, therefore u need to set them to NULL after freeing them
+//static variables remember their value, therefore u need to set them to NULL after liberatoring them
 
 // ft_substr(rawstr, len, ((ft_strlen(rawstr) + 1) - len))
 

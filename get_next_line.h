@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:16:09 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/27 18:38:24 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:06:04 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 size_t	linlen(char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
-
+void	liberator(char **imprisoned_ptr);
 
 
 #endif
