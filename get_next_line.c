@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:31 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/30 14:03:33 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:38:03 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 void	liberator(char **imprisoned_ptr)
 {
-	if (*imprisoned_ptr)
+	if (imprisoned_ptr)
 	{
-		liberator(*imprisoned_ptr);
+		free(*imprisoned_ptr);
 		*imprisoned_ptr = NULL;
 	}
 }
