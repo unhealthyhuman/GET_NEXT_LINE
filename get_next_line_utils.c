@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:54 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/30 15:44:23 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:47:29 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,17 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	subs[i] = '\0';
 	return (subs);
 }
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t		papamericano;
 	char		*str;
 	size_t		i;
 	size_t		e;
-	
+
 	i = 0;
 	e = 0;
 	papamericano = ft_strlen(s1) + ft_strlen(s2);
-	// printf("S1: %s\n", s2);
 	str = ft_calloc(papamericano + 1, sizeof(char));
 	if (str == NULL)
 		return (liberator(&s1), liberator(&s2), NULL);

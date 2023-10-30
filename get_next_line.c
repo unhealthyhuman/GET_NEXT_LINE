@@ -6,7 +6,7 @@
 /*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:15:31 by ischmutz          #+#    #+#             */
-/*   Updated: 2023/10/30 14:41:43 by ischmutz         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:46:41 by ischmutz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static char	*readme(char **rawstr, int fd)
 {
 	int		bytes_read;
 	char	*tinybuffer;
-	
+
 	tinybuffer = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (tinybuffer == NULL)
 	{
@@ -88,7 +88,7 @@ char	*get_next_line(int fd)
 	char		*tmp;
 	static char	*rawstr = NULL;
 	size_t		len;
-	
+
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	rawstr = readme(&rawstr, fd);
@@ -117,8 +117,8 @@ char	*get_next_line(int fd)
 		liberator(&rawstr);
 	return (cookeds);
 }
-//
-//static variables remember their value, therefore u need to set them to NULL after liberatoring them
+//static variables remember their value, therefore u need to set them to NULL
+//after liberatoring them
 
 // ft_substr(rawstr, len, ((ft_strlen(rawstr) + 1) - len))
 
